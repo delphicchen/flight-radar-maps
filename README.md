@@ -94,6 +94,18 @@ python tools/make_tiles.py --out ../flight-radar-maps --levels 2 --cells N50E010
 
 # everything — roughly half an hour
 python tools/make_tiles.py --out ../flight-radar-maps
+
+# then re-do the two cells Taiwan straddles, with the detail pack on top
+# (the 9 MB county file is not in the firmware repo — fetch it into the cache first)
+curl -Lo tools/cache/twcounty2010.geojson \
+  https://raw.githubusercontent.com/g0v/twgeojson/master/json/twCounty2010.geo.json
+python tools/make_tiles.py --out ../flight-radar-maps --cells N20E120,N20E110 \
+    --add-geojson tools/cache/twcounty2010.geojson \
+    --airspace-geojson tools/taiwan_airspace.geojson --min-airport small
 ```
 
-A full world run is about 15 MB across the three levels.
+A full world run is 1203 tiles and 6.8 MB across the three levels.
+
+Note `--add-geojson`, not `--geojson`: a detail pack is drawn *in addition to* Natural Earth.
+A cell is 10° across and usually holds several countries, so replacing the whole outline with
+one national boundary file would erase every neighbour's coastline in that cell.
