@@ -56,7 +56,7 @@ offset  type      field
 
 | Section | Record |
 |---------|--------|
-| `outline` | `f32 lat, f32 lon` pairs. A **NaN latitude starts a new polyline**, and that record's longitude slot carries the brightness class: `0` coastline, `1` country border, `2` state border. |
+| `outline` | `f32 lat, f32 lon` pairs. A **NaN latitude starts a new polyline**, and that record's longitude slot carries the brightness class: `0` coastline, `1` country border, `2` state border, `3` county or district. |
 | `airports` | `char icao[5]`, `f32 lat`, `f32 lon` — 13 bytes |
 | `runways` | `f32 lat1, lon1, lat2, lon2, xlat1, xlon1, xlat2, xlon2` — thresholds, then the extended centreline — 32 bytes |
 | `fixes` | `char name[6]`, `f32 lat`, `f32 lon` — 14 bytes |
@@ -73,6 +73,7 @@ Every source here is redistributable — that is the reason these tiles can be h
 | Layer | Source | Licence |
 |-------|--------|---------|
 | Coastline, country and state borders | [Natural Earth](https://www.naturalearthdata.com/) 1:10m | public domain |
+| US county lines (L2/L3 only) | [Natural Earth](https://www.naturalearthdata.com/) 1:10m `admin_2_counties` | public domain |
 | Airports, runways, navaids | [OurAirports](https://ourairports.com/) | public domain |
 | Taiwan county outline | [g0v/twgeojson](https://github.com/g0v/twgeojson) | CC0 1.0 |
 | Taiwan airspace (FIR, TMAs, control zones) | converted from [Taiwan CAA eAIP](https://ais.caa.gov.tw/) ENR 2.1 | our own conversion |
